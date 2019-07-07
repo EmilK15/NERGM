@@ -1,0 +1,67 @@
+{
+  "name": "nergm",
+  "version": "1.0.0",
+  "description": "basic intro to node express react graphql and mongodb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=production node index.js",
+    "dev-start": "nodemon index.js",
+    "build": "webpack --mode production",
+    "dev-build": "webpack --mode development -w"
+  },
+  "engines": {
+    "node": "^12.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmilK15/NERGM.git"
+  },
+  "author": "Emil Kais",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EmilK15/NERGM/issues"
+  },
+  "homepage": "https://github.com/EmilK15/NERGM#readme",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "connect-mongo": "^3.0.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-graphql": "^0.8.0",
+    "express-session": "^1.16.2",
+    "graphql": "^14.4.2",
+    "graphql-depth-limit": "^1.1.0",
+    "graphql-request": "^1.8.2",
+    "graphql-type-json": "^0.3.0",
+    "helmet": "^3.18.0",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.3.0",
+    "css-loader": "^3.0.0",
+    "eslint": "^6.0.1",
+    "eslint-plugin-react": "^7.14.2",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mocha": "^6.1.4",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
+  }
+}
