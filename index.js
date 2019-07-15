@@ -25,8 +25,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 if(!process.env.NODE_ENV)
     app.use(morgan('dev'));
 
-app.use('/public', express.static(__dirname + '/public'));
 app.use('/dist', express.static(__dirname + '/dist'));
+app.use('/public', express.static(__dirname + '/public'));
 
 app.use('/', routes);
 

@@ -1,5 +1,5 @@
 /node_modules
 .config.js
-public/build/
+dist/
 Errors.log
 Info.log

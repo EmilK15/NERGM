@@ -4,5 +4,5 @@ import { render } from 'react-dom';
 import '../../public/stylesheets/styles.scss';
 
 render((
-    <Main />
-), document.getElementById('root'));
+    <Main />),
+document.getElementById('root'));
