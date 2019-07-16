@@ -7,9 +7,16 @@ const objectSchema = `
 
     type Object {
         id: String!
-        parmA: String!
-        parmB: String!
-        parmC: String
+        paramA: String!
+        paramB: String!
+        paramC: String
+    }
+
+    input inputObject {
+        id: String!
+        paramA: String!
+        paramB: String!
+        paramC: String
     }
 
     type Query {
@@ -17,7 +24,7 @@ const objectSchema = `
     }
 
     type Mutation {
-        createObject(object: Object): JSON!
+        createObject(object: inputObject): JSON!
     }
 `;
 

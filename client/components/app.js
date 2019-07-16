@@ -3,6 +3,5 @@ import { Main } from './containers/';
 import { render } from 'react-dom';
 import '../../public/stylesheets/styles.scss';
 
-render((
-    <Main />),
-document.getElementById('root'));
+render((<Main />),
+    document.getElementById('root'));
