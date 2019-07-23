@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Landingpage extends Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class Landingpage extends Component {
         return(
             <div className="mainContainer">
                 <h1> Intro 1</h1>
+                <button><Link to="/second">To other page!</Link></button>
             </div>
         );
     }
