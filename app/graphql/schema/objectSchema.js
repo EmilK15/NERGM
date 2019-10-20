@@ -1,9 +1,6 @@
 'use strict';
 
-const GraphQLJSON = require('graphql-type-json');
-
 const objectSchema = `
-    scalar JSON
 
     type Object {
         id: String!
@@ -24,7 +21,7 @@ const objectSchema = `
     }
 
     type Mutation {
-        createObject(object: inputObject): JSON!
+        createObject(object: inputObject): Object!
     }
 `;
 
