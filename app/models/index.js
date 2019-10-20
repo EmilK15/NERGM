@@ -3,6 +3,7 @@ const config = require('../config/config');
 const bluebird = require('bluebird');
 const Mongoose = bluebird.promisifyAll(require('mongoose'));
 Mongoose.Promise = require('bluebird');
+Mongoose.set('useCreateIndex', true);
 
 const database = Mongoose.connectAsync(config.database, {
     useNewUrlParser: true,
