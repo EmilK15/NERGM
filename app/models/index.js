@@ -5,8 +5,8 @@ const Mongoose = bluebird.promisifyAll(require('mongoose'));
 Mongoose.Promise = require('bluebird');
 
 const database = Mongoose.connectAsync(config.database, {
-    useMongoClient: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 }).catch(function(err){
     logger.error('Unable to connect to mongoose', err);
 });
