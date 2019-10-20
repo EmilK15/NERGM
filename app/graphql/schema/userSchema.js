@@ -8,7 +8,7 @@ module.exports = gql`
     }
 
     type User {
-        id: String!
+        _id: String!
         role: UserRoleEnum!
         email: String!
         password: String!
@@ -53,6 +53,7 @@ module.exports = gql`
     extend type Mutation {
         registerUser(user: userInput): User!
         updateUser(user: userEdit): User!
+        signIn(email: String!, password: String!): User!
         logout: Boolean!
     }
 `;

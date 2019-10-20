@@ -25,16 +25,21 @@ const getSession = async (req) => {
     }
 };
 
-const batchUsers = async (keys) => {
-    const users = await models.User.findAll({
-        where: { 
-            id: {
-                $in: keys,
-            },
-        },
-    });
-    return keys.map(key => users.find(user => user.id === key));
-};
+/*
+    Use batchUsers if you want to set a temporary store for users on request.
+    Though this is mostly and in-memory soluton, so stick to redis for more
+    consistent operations.
+*/
+// const batchUsers = async (keys) => {
+//     const users = await models.User.findAll({
+//         where: { 
+//             id: {
+//                 $in: keys,
+//             },
+//         },
+//     });
+//     return keys.map(key => users.find(user => user.id === key));
+// };
 
 const apollo_graph = new ApolloServer({
     typeDefs: schema,
@@ -45,9 +50,9 @@ const apollo_graph = new ApolloServer({
             res,
             userSession,
             secret: secretKey,
-            loaders: {
-                user: new DataLoader(keys => batchUsers(keys)),
-            },
+            // loaders: {
+            //     user: new DataLoader(keys => batchUsers(keys)),
+            // },
         };
     }
 });
