@@ -1,4 +1,4 @@
-
+const logger = require('../logger');
 const config = require('../config/config');
 const bluebird = require('bluebird');
 const Mongoose = bluebird.promisifyAll(require('mongoose'));
@@ -8,7 +8,7 @@ const database = Mongoose.connectAsync(config.database, {
     useMongoClient: true,
     useNewUrlParser: true
 }).catch(function(err){
-   console.log(err);
+    logger.error('Unable to connect to mongoose', err);
 });
 
 process.on('SIGINT', () => {

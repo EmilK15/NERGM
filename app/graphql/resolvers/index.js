@@ -1,7 +1,7 @@
-const objectResolver = require('./objectResolver');
+const userResolver = require('./userResolver');
 
-const root = {
-    ...objectResolver
-};
+const root = [
+    userResolver,
+];
 
 module.exports = root;

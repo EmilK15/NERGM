@@ -1,8 +1,14 @@
-const { buildSchema } = require('graphql');
-const objectSchema = require('./objectSchema');
+const { gql } = require('apollo-server-express');
+const userSchema = require('./userSchema');
 
-var schema = buildSchema(`
-    ${objectSchema}
-`);
+var schema = gql`
+    type Query {
+        _: String
+    }
+    
+    type Mutation {
+        _: String
+    }
+`;
 
-module.exports = schema;
+module.exports = [schema, userSchema];
