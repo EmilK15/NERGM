@@ -1,0 +1,14 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $base-color;
+    border-radius: 5px;
+    width: 600px;
+    min-height: 80vh;
+}
+
+#input-username, #input-pw {
+    width: 300px;
+}

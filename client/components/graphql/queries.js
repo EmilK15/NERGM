@@ -19,5 +19,5 @@ export const GET_USERS_OF_TYPE = gql`
             lName
             email
         }
-    } 
+    }
 `;

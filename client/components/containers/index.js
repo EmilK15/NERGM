@@ -1,9 +1,9 @@
 import Landingpage from './Landingpage';
 import Main from './Main';
-import Secondpage from './Secondpage';
+import Dashboard from './Dashboard';
 
 export {
     Landingpage,
     Main,
-    Secondpage
+    Dashboard
 };

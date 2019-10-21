@@ -14,8 +14,6 @@ module.exports = gql`
         password: String!
         fName: String!
         lName: String!
-        loginAttempts: Int
-        lockUntil: Int
     }
 
     type Me {
@@ -24,8 +22,6 @@ module.exports = gql`
         fName: String!
         lName: String!
         email: String!
-        loginAttempts: Int
-        lockUntil: Int
     }
 
     type Token {

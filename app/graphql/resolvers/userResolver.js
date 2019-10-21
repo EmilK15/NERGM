@@ -74,26 +74,10 @@ module.exports = {
                 const user = await User.findOne({email});
                 const isMatch = await user.comparePassword(password);
                 if(isMatch) {
-                    if(!user.lockUntil) {
-                        const newUpdate = {
-                            $set: { loginAttempts: 0 },
-                            $unset: { lockUntil: 1 }
-                        };
-                        const updatedUser = await User.findOneAndUpdate({email}, newUpdate, { new: true });
-                        if(updatedUser) {
-                            const token = { token: await createToken(updatedUser, secret, '30m') };
-                            res.cookie('jwt', token.token, { httpOnly: true, maxAge: 1000 * 60 * 30, });
-                            return updatedUser;
-                        }
-                    } else {
-                        throw new ForbiddenError('You have been locked out, you still need to wait ' + user.lockUntil/6000 + ' minutes.');
-                    }
+                    const token = { token: await createToken(user, secret, '30m') };
+                    res.cookie('jwt', token.token, { httpOnly: true, maxAge: 1000 * 60 * 30, });
+                    return user;
                 } else {
-                    if(user.lockUntil)
-                        throw new ForbiddenError('You have been locked out, please try again soon');
-                    user.incLoginAttempts();
-                    if(user.lockUntil)
-                        throw new ForbiddenError('You have been locked out for 1 hour.');
                     throw new ForbiddenError('Invalid credentials');
                 }
             } catch (err) {

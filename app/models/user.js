@@ -2,17 +2,15 @@ const promise = require('bluebird');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = promise.promisifyAll(require('bcryptjs')),
-    SALT_WORK_FACTOR = 10,
-    MAX_LOGIN_ATTEMPTS = 5,
-    LOCK_TIME = 1 * 60 * 60 * 1000;
+    SALT_WORK_FACTOR = 10;
 const logger = require('../logger');
 
 const userSchema = new Schema({
     email: {type: String, required: [true, 'Need an email'], index: {unique: true}},
     password: {type: String, required: true},
-    loginAttempts: {type: Number, required: true, default: 0},
-    lockUntil: {type: Number},
-    role: {type: String, enum: ['USER', 'ADMIN']}
+    role: {type: String, enum: ['USER', 'ADMIN']},
+    fName: {type: String, required: true},
+    lName: {type: String, required: true}
 });
 
 userSchema.virtual('isLocked').get(function() {
@@ -41,29 +39,9 @@ userSchema.pre('save', function(next) {
         });
 });
 
-userSchema.methods.incLoginAttempts = function(cb) {
-    //if the lock has expired, reset lock attempt to 1
-    if(this.lockUntil && this.lockUntil < Date.now()) {
-        return this.update({
-            $set: {loginAttempts: 1},
-            $unset: {lockUntil: 1}
-        }, cb);
-    }
-    var updates = { $inc: {loginAttempts: 1} };
-    if(this.loginAttempts + 1 >= MAX_LOGIN_ATTEMPTS && !this.isLocked) {
-        updates.$set = { lockUntil: Date.now() + LOCK_TIME};
-    }
-    return this.update(updates, cb);
-};
-
-userSchema.methods.comparePassword = function(candidatePassword, cb) {
-    bcrypt.compareAsync(candidatePassword, this.password)
-        .then(function(isMatch) {
-            cb(null, isMatch);
-        })
-        .catch(function(err) {
-            return cb(err, null);
-        });
+userSchema.methods.comparePassword = async function(candidatePassword) {
+    const isMatch = await bcrypt.compareAsync(candidatePassword, this.password);
+    return isMatch;
 };
 
 module.exports = mongoose.model('User', userSchema);
