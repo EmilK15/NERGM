@@ -10,8 +10,8 @@ class Landingpage extends Component {
 
     render() {
         return(
-            <div className="mainContainer">
-                <h1> Intro 1</h1>
+            <div className="main-container">
+                <h1>Intro to Node React Express GraphQL and MongoDB</h1>
                 <button><Link to="/second">To other page!</Link></button>
             </div>
         );
