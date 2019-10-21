@@ -17,7 +17,7 @@ const options = {
         json: true,
         colorize: true
     }
-}
+};
 
 const logger = winston.createLogger({
     transports: [

@@ -19,10 +19,13 @@ module.exports = gql`
     }
 
     type Me {
+        _id: String!
         role: UserRoleEnum!
         fName: String!
         lName: String!
         email: String!
+        loginAttempts: Int
+        lockUntil: Int
     }
 
     type Token {
@@ -34,7 +37,7 @@ module.exports = gql`
         password: String!
         fName: String!
         lName: String!
-        role: String!
+        role: UserRoleEnum!
     }
 
     input userEdit {
@@ -47,13 +50,13 @@ module.exports = gql`
 
     extend type Query {
         getMe: Me!
-        getUsersOfType(role: UserRoleEnum): [User!]
+        getUsersOfType(role: UserRoleEnum): [Me!]
     }
 
     extend type Mutation {
-        registerUser(user: userInput): User!
-        updateUser(user: userEdit): User!
-        signIn(email: String!, password: String!): User!
+        registerUser(user: userInput): Me!
+        updateUser(user: userEdit): Me!
+        signIn(email: String!, password: String!): Me!
         logout: Boolean!
     }
 `;

@@ -9,12 +9,14 @@ const cors = require('cors');
 const logger = require('./app/logger');
 var routes = require('./app/routes');
 var server = require('http').Server(app);
+const cookieParser = require('cookie-parser');
 
 app.use(compression());
 app.use(helmet());
 app.use(cors({
     credentials: true
 }));
+app.use(cookieParser());
 
 app.use(express.static(__dirname + '/views'));
 

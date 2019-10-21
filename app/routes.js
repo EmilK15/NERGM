@@ -8,7 +8,6 @@ const jwt = require('jsonwebtoken');
 var path = require('path');
 const secretKey = require('../config').secretKey;
 const { ApolloServer, AuthenticationError } = require('apollo-server-express');
-const DataLoader = require('dataloader');
 
 app.get('/', function(req, res) {
     res.render('index');

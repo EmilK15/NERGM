@@ -12,9 +12,9 @@ const createToken = async (user, secret, expiresIn) => {
 
 module.exports = {
     Mutation: {
-        registerUser: async ({}, params, {secret, res} ) => {
+        registerUser: async (parent, { user }, {secret, res} ) => {
             try {
-                const newUser = new User(params.user);
+                const newUser = new User(user);
                 const savedUser = await newUser.save();
 
                 if(!savedUser)
@@ -31,7 +31,7 @@ module.exports = {
         },
         updateUser: combineResolvers(
             isAuthenticated,
-            async ({}, {user}, { userSession, secret, res }) => {
+            async (parent, {user}, { userSession, secret, res }) => {
                 try {
                     let { email, fName, lName, newPassword, confirmPassword } = user;
                     const newEmail = email || userSession.email;
@@ -47,9 +47,13 @@ module.exports = {
                                 password: newPassword
                             };
                             const updatedUser = await User.findOneAndUpdate({email}, newUpdate, { new: true });
+
                             if(!updatedUser)
                                 throw new UserInputError('Entered a wrong input for updating');
 
+                            const token = { token: await createToken(updatedUser, secret, '30m') };
+
+                            res.cookie('jwt', token.token, { httpOnly: true, maxAge: 1000 * 60 * 30, });
                             return {
                                 _id: updatedUser._id,
                                 email: updatedUser.email,
@@ -65,7 +69,7 @@ module.exports = {
                 }
             }
         ),
-        signIn: async ({}, {email, password}, {res}) => {
+        signIn: async (parent, {email, password}, {res, secret}) => {
             try {
                 const user = await User.findOne({email});
                 const isMatch = await user.comparePassword(password);
@@ -77,6 +81,8 @@ module.exports = {
                         };
                         const updatedUser = await User.findOneAndUpdate({email}, newUpdate, { new: true });
                         if(updatedUser) {
+                            const token = { token: await createToken(updatedUser, secret, '30m') };
+                            res.cookie('jwt', token.token, { httpOnly: true, maxAge: 1000 * 60 * 30, });
                             return updatedUser;
                         }
                     } else {
@@ -87,7 +93,7 @@ module.exports = {
                         throw new ForbiddenError('You have been locked out, please try again soon');
                     user.incLoginAttempts();
                     if(user.lockUntil)
-                        throw new ForbiddenError('You ahve been locked out for 1 hour.');
+                        throw new ForbiddenError('You have been locked out for 1 hour.');
                     throw new ForbiddenError('Invalid credentials');
                 }
             } catch (err) {
@@ -97,7 +103,7 @@ module.exports = {
         },
         logout: combineResolvers(
             isAuthenticated,
-            async ({}, {}, {res}) => {
+            async (parent, params, {res}) => {
                 res.clearCookie('jwt');
                 return true;
             }
@@ -106,7 +112,7 @@ module.exports = {
     Query: {
         getMe: combineResolvers(
             isAuthenticated,
-            async ({}, {}, {userSession}) => {
+            async (parent, params, {userSession}) => {
                 return {
                     email: userSession.email,
                     fName: userSession.fName,
@@ -117,7 +123,7 @@ module.exports = {
         ),
         getUsersOfType: combineResolvers(
             isAuthenticated,
-            async ({}, { role }, {}) => {
+            async (parent, { role }) => {
                 const users = User.find({ role });
                 return users;
             }
