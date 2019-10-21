@@ -16,11 +16,10 @@ module.exports = {
             try {
                 const newUser = new User(user);
                 const savedUser = await newUser.save();
-
                 if(!savedUser)
                     throw new UserInputError('Email or Username in use already');
 
-                const token = { token: await createToken(user, secret, '30m') };
+                const token = { token: await createToken(savedUser, secret, '30m') };
                 res.cookie('jwt', token.token, { httpOnly: true, maxAge: 1000 * 60 * 30, });
                 return savedUser;
             } catch (err) {
@@ -97,12 +96,7 @@ module.exports = {
         getMe: combineResolvers(
             isAuthenticated,
             async (parent, params, {userSession}) => {
-                return {
-                    email: userSession.email,
-                    fName: userSession.fName,
-                    lName: userSession.lName,
-                    role: userSession.role
-                };
+                return userSession;
             }
         ),
         getUsersOfType: combineResolvers(
