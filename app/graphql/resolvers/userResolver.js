@@ -17,7 +17,7 @@ module.exports = {
                 const newUser = new User(user);
                 const savedUser = await newUser.save();
                 if(!savedUser)
-                    throw new UserInputError('Email or Username in use already');
+                    throw new UserInputError('Email in use already');
 
                 const token = { token: await createToken(savedUser, secret, '30m') };
                 res.cookie('jwt', token.token, { httpOnly: true, maxAge: 1000 * 60 * 30, });

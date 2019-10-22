@@ -22,7 +22,8 @@ class Dashboard extends Component {
                             return <Loading />;
                         if(error)
                             return <Redirect to="/" />;
-                        return <Home />;
+                        if(me)
+                            return <Home />;
                     }}
                 </Query>
             </div>

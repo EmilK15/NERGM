@@ -3,11 +3,13 @@ import Errormsg from './Errormsg';
 import Loading from './Loading';
 import Logout from './Logout';
 import Home from './Home';
+import Register from './Register';
 
 export {
 	Errormodal,
 	Errormsg,
 	Loading,
 	Logout,
-	Home
+	Home,
+	Register
 };

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { SIGN_IN} from '../graphql/mutations';
 import { Mutation } from 'react-apollo';
 import { Form, Button } from 'react-bootstrap';
-import { Errormsg, Loading } from '../presentation';
+import { Errormsg, Loading, Register } from '../presentation';
 
 class Landingpage extends Component {
     constructor(props) {
@@ -55,7 +55,7 @@ class Landingpage extends Component {
                             {errormsg}
                             {loadingmsg}
                             {redirect}
-                            <Form.Group controlId="input-username">
+                            <Form.Group controlId="input-email">
                                 <Form.Label>Email Address</Form.Label>
                                 <Form.Control value={this.state.email} onChange={(e, key) => this.onChangeHandler(e, 'email')} type="email" placeholder="Email" required></Form.Control>
                             </Form.Group>
@@ -65,6 +65,7 @@ class Landingpage extends Component {
                                 <Form.Control value={this.state.password} onChange={(e, key) => this.onChangeHandler(e, 'password')} type="password" placeholder="Password" min="8" max="20" required></Form.Control>
                             </Form.Group>
                             <Button className="login-btn" type="submit">Login</Button>
+                            <Register />
                         </Form>
                     )
                 }}

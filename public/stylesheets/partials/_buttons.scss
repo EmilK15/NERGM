@@ -1,5 +1,13 @@
-.login-btn {
+.login-btn, .register-btn {
     width: 300px;
     border-radius: 10px;
-    background-color: $base-color;
+    background-color: $secondary-color;
+}
+
+.register-btn {
+    margin-top: 10px;
+}
+
+.btn-details {
+    margin-top: 10px;
 }
