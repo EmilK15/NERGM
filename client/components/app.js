@@ -8,6 +8,8 @@ import ApolloClient from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from 'react-apollo';
 import { createUploadLink } from 'apollo-upload-client';
+import store from './redux';
+import { Provider } from 'react-redux';
 
 let link;
 if(process.env.NODE_ENV === 'production')
@@ -23,9 +25,11 @@ const client = new ApolloClient({
 });
 
 render((<ApolloProvider client={client}>
-        <Router>
-            <Main />
-        </Router>
+        <Provider store={store}>
+            <Router>
+                <Main />
+            </Router>            
+        </Provider>
     </ApolloProvider>),
 document.getElementById('root'));
 
