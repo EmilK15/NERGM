@@ -15,9 +15,9 @@ const Register = () => {
     return (
         <div>
             <Button className="register-btn" onClick={handleShow}>Register</Button>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Register</Modal.Title>
+            <Modal show={show} onHide={handleClose} className="register-modal">
+                <Modal.Header className="register-header">
+                    <Modal.Title className="register-modal-title">Register</Modal.Title>
                 </Modal.Header>
                 <Formik 
                     initialValues={{
