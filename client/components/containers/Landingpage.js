@@ -3,7 +3,8 @@ import { Redirect } from 'react-router-dom';
 import { SIGN_IN} from '../graphql/mutations';
 import { Mutation } from 'react-apollo';
 import { Form, Button } from 'react-bootstrap';
-import { Errormsg, Loading, Register } from '../presentation';
+import { Errormsg, Loading, Register, Success } from '../presentation';
+import { connect } from 'react-redux';
 
 class Landingpage extends Component {
     constructor(props) {
@@ -42,6 +43,9 @@ class Landingpage extends Component {
     }
 
     render() {
+        const { userError, registerSuccess } = this.props;
+        const sessionEnded = userError ? <Errormsg message="Please login to continue to dashboard." /> : null;
+        const registrationSuccess = registerSuccess ? <Success message="Registration successful! Please login." /> : null;
         return(
             <div className="main-container">
                 <Mutation mutation={SIGN_IN} variables={{email: this.state.email, password: this.state.password}}>
@@ -52,6 +56,8 @@ class Landingpage extends Component {
                     return (
                         <Form className="login-form" onSubmit={(e) => this.onSubmitLogin(e, signIn)}>
                             <Form.Label className="login-title">Login Page</Form.Label>
+                            {sessionEnded}
+                            {registrationSuccess}
                             {errormsg}
                             {loadingmsg}
                             {redirect}
@@ -75,4 +81,12 @@ class Landingpage extends Component {
     };
 };
 
-export default Landingpage;
+const mapStateToProps = state => ({
+    userError: state.user.userError,
+    registerSuccess: state.user.registerSuccess
+});
+
+export default connect(
+    mapStateToProps,
+    null
+)(Landingpage);

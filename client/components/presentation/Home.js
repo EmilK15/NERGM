@@ -3,9 +3,11 @@ import { Logout } from '../presentation';
 
 const Home = () => {
     return (
-        <div className="home-container">
-            Welcome to the home dashboard
-            <Logout />
+        <div className="dashboard-container">
+            <div className="home-container">
+                Welcome to the home dashboard
+                <Logout />
+            </div>            
         </div>
     )
 };

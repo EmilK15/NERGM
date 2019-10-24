@@ -4,6 +4,8 @@ import { REGISTER_USER } from '../graphql/mutations';
 import { useMutation } from '@apollo/react-hooks';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { register_error, register_success } from '../redux/actions/userActions';
 
 const Register = () => {
     const [show, setShow] = useState(false);
@@ -11,7 +13,9 @@ const Register = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [registerUser] = useMutation(REGISTER_USER)
+    const [registerUser] = useMutation(REGISTER_USER);
+    const dispatch = useDispatch();
+
     return (
         <div>
             <Button className="register-btn" onClick={handleShow}>Register</Button>
@@ -37,6 +41,8 @@ const Register = () => {
                         if(newUser) {
                             resetForm();
                             handleClose();
+                            dispatch(register_success(true));
+                            dispatch(register_error(false));
                         }
                     }}
                     validationSchema={yup.object().shape({

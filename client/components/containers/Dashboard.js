@@ -1,33 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Loading } from '../presentation';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/react-hooks';
 import { GET_ME } from '../graphql/queries';
 import { Redirect } from 'react-router-dom';
 import { Home } from '../presentation';
+import { useDispatch } from 'react-redux';
+import { get_user, user_error } from '../redux/actions/userActions';
 
-class Dashboard extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        }
+const Dashboard = () => {
+    const { loading, error, data } = useQuery(GET_ME);
+    const dispatch = useDispatch();
+
+    if(loading)
+        return <Loading />;
+    if(error) {
+        dispatch(user_error(true));
+        return <Redirect to="/"/>;
     }
-
-    render() {
-        return (
-            <div className="dashboard-container">
-                <Query query={GET_ME}>
-                    {({loading, error, data}) => {
-                        const me = data;
-                        if(loading)
-                            return <Loading />;
-                        if(error)
-                            return <Redirect to="/" />;
-                        if(me)
-                            return <Home />;
-                    }}
-                </Query>
-            </div>
-        )
+    if(data) {
+        dispatch(get_user(data.getMe));
+        return <Home />
     }
 };
 

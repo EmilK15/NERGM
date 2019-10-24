@@ -24,3 +24,23 @@ export const get_user = (user) => {
         payload: user
     }
 };
+
+export const register_error = (bool) => {
+    return {
+        type: "UPDATE_SINGLE_VALUE",
+        payload: {
+            key: 'registerError',
+            value: bool
+        }
+    }
+};
+
+export const register_success = (bool) => {
+    return {
+        type: "UPDATE_SINGLE_VALUE",
+        payload: {
+            key: 'registerSuccess',
+            value: bool
+        }
+    }
+};
