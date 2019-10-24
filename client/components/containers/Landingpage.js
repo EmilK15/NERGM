@@ -62,7 +62,7 @@ class Landingpage extends Component {
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control value={this.state.password} onChange={(e, key) => this.onChangeHandler(e, 'password')} type="password" placeholder="Password" min="8" max="20" required></Form.Control>
                             </Form.Group>
-                            <Button className="login-btn" type="submit" disabled={this.state.email && this.state.password}>Login</Button>
+                            <Button className="login-btn" type="submit" disabled={!this.state.email || !this.state.password}>Login</Button>
                             <Register />
                         </Form>
                     )

@@ -6,3 +6,23 @@
     background-color: $pent-color;
     min-height: 100vh;
 }
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $tertiary-color;
+    min-height: 100vh;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $base-color;
+    border-radius: 5px;
+    width: 600px;
+    min-height: 80vh;
+}

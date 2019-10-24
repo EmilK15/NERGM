@@ -5,6 +5,7 @@ import Logout from './Logout';
 import Home from './Home';
 import Register from './Register';
 import Success from './Success';
+import Dashboard from './Dashboard';
 
 export {
 	Errormodal,
@@ -13,5 +14,6 @@ export {
 	Logout,
 	Home,
 	Register,
-	Success
+	Success,
+	Dashboard
 };

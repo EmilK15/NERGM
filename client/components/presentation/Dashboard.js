@@ -1,9 +1,8 @@
 import React from 'react';
-import { Loading } from '../presentation';
+import { Loading, Home } from './';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_ME } from '../graphql/queries';
 import { Redirect } from 'react-router-dom';
-import { Home } from '../presentation';
 import { useDispatch } from 'react-redux';
 import { get_user, user_error } from '../redux/actions/userActions';
 

@@ -7,7 +7,7 @@ const Home = () => {
             <div className="home-container">
                 Welcome to the home dashboard
                 <Logout />
-            </div>            
+            </div>
         </div>
     )
 };
