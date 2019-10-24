@@ -17,26 +17,20 @@ userSchema.virtual('isLocked').get(function() {
     return !!(this.lockUntil && this.lockUntil > Date.now());
 });
 
-userSchema.pre('save', function(next) {
-    var user = this;
+userSchema.pre('save', async function(next) {
+    const user = this;
 
     if(!user.isModified('password')) {
         return next();
     }
-    bcrypt.genSaltAsync(SALT_WORK_FACTOR)
-        .then(function(salt){
-            return bcrypt.hashAsync(user.password, salt);
-        })
-        .then(function(hash) {
-            user.password = hash;
-            next();
-        })
-        .catch(function(e) {
-            logger.error('Salting error ' + e);
-        })
-        .catch(function(e) {
-            logger.error('Hash error ' + e);
-        });
+    try {
+        const salt = await bcrypt.genSaltAsync(SALT_WORK_FACTOR);
+        const hash = await bcrypt.hashAsync(user.password, salt);
+        user.password = hash;
+        return next();
+    } catch (err) {
+        logger.error(err);
+    }
 });
 
 userSchema.methods.comparePassword = async function(candidatePassword) {
