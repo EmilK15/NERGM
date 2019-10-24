@@ -11,8 +11,7 @@ class Landingpage extends Component {
         super(props);
         this.state = {
             email: '',
-            password: '',
-            error: ''
+            password: ''
         };
     }
 
@@ -24,22 +23,15 @@ class Landingpage extends Component {
 
     onSubmitLogin(e, signIn) {
         e.preventDefault();
-        if(this.state.email && this.state.password) {
-            signIn({
-                variables: {
-                    email: this.state.email,
-                    password: this.state.password
-                }});
-            this.setState({
-                email: '',
-                password: '',
-                error: ''
-            });
-        } else {
-            this.setState({
-                error: 'Please input email and password'
-            });
-        }
+        signIn({
+            variables: {
+                email: this.state.email,
+                password: this.state.password
+            }});
+        this.setState({
+            email: '',
+            password: ''
+        });
     }
 
     render() {
@@ -70,7 +62,7 @@ class Landingpage extends Component {
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control value={this.state.password} onChange={(e, key) => this.onChangeHandler(e, 'password')} type="password" placeholder="Password" min="8" max="20" required></Form.Control>
                             </Form.Group>
-                            <Button className="login-btn" type="submit">Login</Button>
+                            <Button className="login-btn" type="submit" disabled={this.state.email && this.state.password}>Login</Button>
                             <Register />
                         </Form>
                     )
