@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { GET_ME } from '../graphql/queries';
 import { Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { get_user, user_error } from '../redux/actions/userActions';
+import { get_user, user_error } from '../../redux/actions/userActions';
 
 const Dashboard = () => {
     const { loading, error, data } = useQuery(GET_ME);

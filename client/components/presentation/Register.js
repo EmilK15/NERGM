@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { register_error, register_success } from '../redux/actions/userActions';
+import { register_error, register_success } from '../../redux/actions/userActions';
 
 const Register = () => {
     const [show, setShow] = useState(false);

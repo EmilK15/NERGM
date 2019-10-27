@@ -8,7 +8,7 @@ import ApolloClient from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from 'react-apollo';
 import { createUploadLink } from 'apollo-upload-client';
-import store from './redux';
+import store from '../redux';
 import { Provider } from 'react-redux';
 
 let link;
