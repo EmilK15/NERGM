@@ -1,5 +1,6 @@
 import React from 'react';
-import { Loading, Home } from './';
+import { Home } from './';
+import { Loading } from './responses';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_ME } from '../graphql/queries';
 import { Redirect } from 'react-router-dom';

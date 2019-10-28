@@ -3,7 +3,8 @@ import { Redirect } from 'react-router-dom';
 import { SIGN_IN} from '../graphql/mutations';
 import { Mutation } from 'react-apollo';
 import { Form, Button } from 'react-bootstrap';
-import { Errormsg, Loading, Register, Success } from '../presentation';
+import { Errormsg, Loading, Success } from '../presentation/responses';
+import { Register } from '../presentation';
 import { connect } from 'react-redux';
 
 class Landingpage extends Component {

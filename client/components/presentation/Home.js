@@ -1,5 +1,5 @@
 import React from 'react';
-import { Logout } from '../presentation';
+import { Logout } from './';
 
 const Home = () => {
     return (
