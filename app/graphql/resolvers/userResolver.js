@@ -20,7 +20,7 @@ module.exports = {
                     throw new UserInputError('Email in use already');
 
                 const token = { token: await createToken(savedUser, secret, '30m') };
-                res.cookie('jwt', token.token, { httpOnly: true, maxAge: 1000 * 60 * 30, });
+                res.cookie('jwt', token.token, { httpOnly: true, maxAge: 1000 * 60 * 30 });
                 return savedUser;
             } catch (err) {
                 logger.error('unable to registerUser');

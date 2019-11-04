@@ -13,10 +13,6 @@ const userSchema = new Schema({
     lName: {type: String, required: true}
 });
 
-userSchema.virtual('isLocked').get(function() {
-    return !!(this.lockUntil && this.lockUntil > Date.now());
-});
-
 userSchema.pre('save', async function(next) {
     const user = this;
 
