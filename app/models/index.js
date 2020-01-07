@@ -13,9 +13,9 @@ const database = Mongoose.connectAsync(config.database, {
 });
 
 process.on('SIGINT', () => {
-	Mongoose.connection.close(() => {
-		process.exit(0);
-	});
+    Mongoose.connection.close(() => {
+        process.exit(0);
+    });
 });
 
 module.exports = {

@@ -25,6 +25,8 @@ const userReducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 [action.payload.key]: action.payload.value
             });
+        case 'RESET_USER':
+            return Object.assign(state, initialState);
         default:
             return state;
     }

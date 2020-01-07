@@ -25,6 +25,12 @@ export const get_user = (user) => {
     }
 };
 
+export const reset_user = () => {
+    return {
+        type: "RESET_USER"
+    }
+}
+
 export const register_error = (bool) => {
     return {
         type: "UPDATE_SINGLE_VALUE",
