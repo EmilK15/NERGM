@@ -7,7 +7,8 @@ Mongoose.set('useCreateIndex', true);
 
 const database = Mongoose.connectAsync(config.database, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 }).catch(function(err){
     logger.error('Unable to connect to mongoose', err);
 });

@@ -11,7 +11,7 @@ const Logout = () => {
     const dispatch = useDispatch();
 
     if(loading)
-        return (<Loading />);
+        return <Loading />;
     return (
         <Link className="logout-link" to="/"
             onClick={(e) => {

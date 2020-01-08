@@ -45,7 +45,8 @@ module.exports = {
                                 lName: newLName,
                                 password: newPassword
                             };
-                            const updatedUser = await User.findOneAndUpdate({email}, newUpdate, { new: true });
+
+                            const updatedUser = await User.findByIdAndUpdate(userSession.id, newUpdate, { new: true });
 
                             if(!updatedUser)
                                 throw new UserInputError('Entered a wrong input for updating');
@@ -61,9 +62,31 @@ module.exports = {
                                 role: updatedUser.role
                             };
                         }
+                    } else {
+                        const newUpdate = {
+                            email: newEmail,
+                            fName: newFName,
+                            lName: newLName,
+                        };
+                        
+                        const updatedUser = await User.findByIdAndUpdate(userSession.id, newUpdate, { new: true });
+                        if(updatedUser) {
+                            res.clearCookie('jwt');
+                            const token = { token: await createToken(updatedUser, secret, '30m') };
+                            res.cookie('jwt', token.token, { httpOnly: true, maxAge: 1000 * 60 * 30 });
+                            return {
+                                _id: updatedUser._id,
+                                email: updatedUser.email,
+                                fName: updatedUser.fName,
+                                lName: updatedUser.lName,
+                                role: updatedUser.role,
+                            };
+                        } else {
+                            throw new UserInputError('Entered a wrong input for updating name information.');
+                        }
                     }
                 } catch (err) {
-                    logger.error('error occured when trying to update user', err);
+                    logger.error('error occured when trying to update user.', err);
                     return err;
                 }
             }

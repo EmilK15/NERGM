@@ -1,12 +1,12 @@
 import React from 'react';
-import { Home } from './';
-import { Loading } from './responses';
+import { Home, Account } from './';
+import { Loading } from '../responses';
 import { useQuery } from '@apollo/react-hooks';
-import { GET_ME } from '../graphql/queries';
+import { GET_ME } from '../../graphql/queries';
 import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { get_user, user_error } from '../../redux/actions/userActions';
-import { Topbar } from './topbar';
+import { get_user, user_error } from '../../../redux/actions/userActions';
+import { Topbar } from '../topbar';
 
 const dropDownRenderSwitch = navigation => {
     switch(navigation) {
@@ -15,7 +15,7 @@ const dropDownRenderSwitch = navigation => {
         case 'Analytics':
             return <div>Analytics</div>;
         case 'My Account':
-            return <div>My Account</div>;
+            return <Account />;
         default:
             return <Home />;
     }

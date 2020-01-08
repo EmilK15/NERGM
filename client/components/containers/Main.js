@@ -1,7 +1,7 @@
 import React from 'react';
 import { Landingpage } from './';
 import { Switch, Route } from 'react-router';
-import { Dashboard } from '../presentation';
+import { Dashboard } from '../presentation/dashboard';
 
 const Main = () => {
     return (
