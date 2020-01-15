@@ -7,6 +7,8 @@ const initialState = {
     userLoading: false,
     userError: false,
     registerSuccess: false,
+    userUpdateSuccess: false,
+    userUpdateFail: false,
 };
 
 const userReducer = (state = initialState, action) => {
