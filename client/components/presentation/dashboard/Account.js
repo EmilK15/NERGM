@@ -21,19 +21,17 @@ const Account = () => {
             onSubmit= { async (values, { setSubmitting, resetForm }) => {
                 setSubmitting(true);
                 if(values.fName || values.lName || (values.newPassword && values.confirmPassword)) {
-                    console.log(values);
                     const update = await updateUser({
                         variables: {
                             user: values
                         }
                     });
                     if(update) {
-                        console.log(update);
                         resetForm();
                         setSubmitting(false);
                     }
                 } else {
-                    //console.log('No new information added');
+                    console.log('No new information added');
                 }
             }}
             validationSchema={yup.object().shape({

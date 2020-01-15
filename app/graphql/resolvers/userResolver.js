@@ -46,7 +46,7 @@ module.exports = {
                                 password: newPassword
                             };
 
-                            const updatedUser = await User.findByIdAndUpdate(userSession.id, newUpdate, { new: true });
+                            const updatedUser = await User.findByIdAndUpdate(userSession._id, newUpdate, { new: true });
 
                             if(!updatedUser)
                                 throw new UserInputError('Entered a wrong input for updating');
@@ -68,8 +68,7 @@ module.exports = {
                             fName: newFName,
                             lName: newLName,
                         };
-                        
-                        const updatedUser = await User.findByIdAndUpdate(userSession.id, newUpdate, { new: true });
+                        const updatedUser = await User.findByIdAndUpdate(userSession._id, newUpdate, { new: true });
                         if(updatedUser) {
                             res.clearCookie('jwt');
                             const token = { token: await createToken(updatedUser, secret, '30m') };

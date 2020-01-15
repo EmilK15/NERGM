@@ -33,7 +33,6 @@ export const LOGOUT = gql`
 export const UPDATE_USER = gql`
     mutation updateUser($user: userEdit) {
         updateUser(user: $user) {
-            _id
             email
             role
             fName
