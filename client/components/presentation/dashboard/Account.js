@@ -76,14 +76,14 @@ const Account = () => {
                         </Form.Group>
                         <Form.Group controlId="input-pw">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control value={values.password} onChange={handleChange} onBlur={handleBlur} name="password"
-                                type="password" placeholder="Password" isInvalid={touched.password && errors.password}
-                                isValid={touched.password && !errors.password}/>
-                            <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
+                            <Form.Control value={values.newPassword} onChange={handleChange} onBlur={handleBlur} name="newPassword"
+                                type="password" placeholder="Password" isInvalid={touched.newPassword && errors.newPassword}
+                                isValid={touched.newPassword && !errors.newPassword}/>
+                            <Form.Control.Feedback type="invalid">{errors.newPassword}</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group controlId="input-confirm-pw">
                             <Form.Label>Confirm Password</Form.Label>
-                            <Form.Control value={values.confirmPassword} onChange={handleChange} onBlur={handleBlur} name="confirm password"
+                            <Form.Control value={values.confirmPassword} onChange={handleChange} onBlur={handleBlur} name="confirmPassword"
                                 type="password" placeholder="Confirm Password" isInvalid={touched.confirmPassword && errors.confirmPassword}
                                 isValid={touched.confirmPassword && !errors.confirmPassword}/>
                             <Form.Control.Feedback type="invalid">{errors.confirmPassword}</Form.Control.Feedback>

@@ -46,7 +46,7 @@ module.exports = {
                                 password: newPassword
                             };
 
-                            const updatedUser = await User.findByIdAndUpdate(userSession._id, newUpdate, { new: true });
+                            const updatedUser = await User.findOneAndUpdate({ _id: userSession._id }, newUpdate, { new: true });
 
                             if(!updatedUser)
                                 throw new UserInputError('Entered a wrong input for updating');
@@ -55,7 +55,6 @@ module.exports = {
 
                             res.cookie('jwt', token.token, { httpOnly: true, maxAge: 1000 * 60 * 30, });
                             return {
-                                _id: updatedUser._id,
                                 email: updatedUser.email,
                                 fName: updatedUser.fName,
                                 lName: updatedUser.lName,
@@ -68,7 +67,7 @@ module.exports = {
                             fName: newFName,
                             lName: newLName,
                         };
-                        const updatedUser = await User.findByIdAndUpdate(userSession._id, newUpdate, { new: true });
+                        const updatedUser = await User.findOneAndUpdate({ _id: userSession._id }, newUpdate, { new: true });
                         if(updatedUser) {
                             res.clearCookie('jwt');
                             const token = { token: await createToken(updatedUser, secret, '30m') };

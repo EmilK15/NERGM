@@ -13,8 +13,8 @@ const Topbar = () => {
             <Navbar.Brand>Icon Here</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    <NavDropdown title={name} id="basic-nav-dropdown">
+                <Nav className="justify-content-end" style={{ width: "100%" }}>
+                    <NavDropdown title={name} id="basic-nav-dropdown" alignRight>
                         <NavDropdown.Item key="Home" title={'Home'} onClick={(e) => dispatch(select_topbar_navigation('Home'))}>Home</NavDropdown.Item>
                         <NavDropdown.Item key="Analytics" title={'Analytics'} onClick={(e) => dispatch(select_topbar_navigation('Analytics'))}>Analytics</NavDropdown.Item>
                         <NavDropdown.Item key="My Account" title={'My Account'} onClick={(e) => dispatch(select_topbar_navigation('My Account'))}>My Account</NavDropdown.Item>

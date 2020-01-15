@@ -29,6 +29,21 @@ userSchema.pre('save', async function(next) {
     }
 });
 
+/* Works for findByIdAndUpdate as it is a wrapper function of findOneAndUpdate */
+userSchema.pre('findOneAndUpdate', async function(next) {
+    if(!this._update.password) {
+        return next();
+    }
+    try {
+        const salt = await bcrypt.genSaltAsync(SALT_WORK_FACTOR);
+        const hash = await bcrypt.hashAsync(this._update.password, salt);
+        this._update.password = hash;
+        return next();
+    } catch (err) {
+        logger.error(err);
+    }
+});
+
 userSchema.methods.comparePassword = async function(candidatePassword) {
     const isMatch = await bcrypt.compareAsync(candidatePassword, this.password);
     return isMatch;
